@@ -1,45 +1,23 @@
-import { useState } from 'react'
-import logo from './logo.svg'
+import React, {Suspense} from 'react'
 import './App.css'
+// import ControlledInput from "./components/ControlledInput";
+// import ControlledSelect from "./components/ControlledSelect";
+// import UncontrolledInput from "./components/UncontrolledInput";
 
-function App() {
-  const [count, setCount] = useState(0)
+const Fallback = React.lazy(() => import("./components/Fallback"))
+const SuspendContent = React.lazy(() => import("./components/SuspendContent"))
 
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>Hello Vite + React!</p>
-        <p>
-          <button type="button" onClick={() => setCount((count) => count + 1)}>
-            count is: {count}
-          </button>
-        </p>
-        <p>
-          Edit <code>App.tsx</code> and save to test HMR updates.
-        </p>
-        <p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-          {' | '}
-          <a
-            className="App-link"
-            href="https://vitejs.dev/guide/features.html"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Vite Docs
-          </a>
-        </p>
-      </header>
-    </div>
-  )
+const App = () => {
+    return (
+        <>
+            <Suspense fallback={<Fallback/>}>
+                <SuspendContent/>
+            </Suspense>
+            {/*<UncontrolledInput/>*/}
+            {/*<ControlledInput/>*/}
+            {/*<ControlledSelect/>*/}
+        </>
+    )
 }
 
 export default App
